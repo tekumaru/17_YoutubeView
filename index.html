@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -38,13 +38,8 @@
         transform: scale(0.97);
       }
 
-      .thumb {
-        width: 100%;
-        display: block;
-      }
-
       .card-body {
-        padding: 10px;
+        padding: 15px;
         font-size: 14px;
         color: #333;
       }
@@ -65,29 +60,35 @@
     </div>
 
     <script>
-      // ▼ここに動画URLを入れるだけ
-      const videoUrls = [
-        "https://youtu.be/PLmG1FvAUyc",
-        "https://youtu.be/-EKiMwGYCk4",
-      ];
-
-      function createList() {
+      async function createList() {
         const list = document.getElementById("list");
 
-        videoUrls.forEach((url) => {
-          const card = document.createElement("div");
-          card.className = "card";
+        try {
+          const response = await fetch("list.csv");
+          const text = await response.text();
 
-          card.innerHTML = `
-            <a href="${url}" target="_blank">
-              <div class="card-body">
-                YouTubeで再生
-              </div>
-            </a>
-          `;
+          const lines = text.split("\n");
 
-          list.appendChild(card);
-        });
+          lines.forEach((url) => {
+            url = url.trim();
+            if (!url) return;
+
+            const card = document.createElement("div");
+            card.className = "card";
+
+            card.innerHTML = `
+              <a href="${url}" target="_blank">
+                <div class="card-body">
+                  ${url}
+                </div>
+              </a>
+            `;
+
+            list.appendChild(card);
+          });
+        } catch (e) {
+          list.innerHTML = "CSVの読み込みに失敗しました";
+        }
       }
 
       // ページ読み込み時に実行
