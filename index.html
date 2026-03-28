@@ -59,40 +59,6 @@
       <div id="list"></div>
     </div>
 
-    <script>
-      async function createList() {
-        const list = document.getElementById("list");
-
-        try {
-          const response = await fetch("list.csv");
-          const text = await response.text();
-
-          const lines = text.split("\n");
-
-          lines.forEach((url) => {
-            url = url.trim();
-            if (!url) return;
-
-            const card = document.createElement("div");
-            card.className = "card";
-
-            card.innerHTML = `
-              <a href="${url}" target="_blank">
-                <div class="card-body">
-                  ${url}
-                </div>
-              </a>
-            `;
-
-            list.appendChild(card);
-          });
-        } catch (e) {
-          list.innerHTML = "CSVの読み込みに失敗しました";
-        }
-      }
-
-      // ページ読み込み時に実行
-      createList();
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
