@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube一覧</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+        background: #f0f2f5;
+      }
+
+      .header {
+        background: #ff0000;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+        transition: transform 0.1s;
+      }
+
+      .card:active {
+        transform: scale(0.97);
+      }
+
+      .thumb {
+        width: 100%;
+        display: block;
+      }
+
+      .card-body {
+        padding: 10px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .card a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header">YouTube一覧</div>
+
+    <div class="container">
+      <div id="list"></div>
+    </div>
+
+    <script>
+      // ▼ここに動画URLを入れるだけ
+      const videoUrls = [
+        "https://youtu.be/PLmG1FvAUyc",
+        "https://youtu.be/-EKiMwGYCk4",
+      ];
+
+      function createList() {
+        const list = document.getElementById("list");
+
+        videoUrls.forEach((url) => {
+          const card = document.createElement("div");
+          card.className = "card";
+
+          card.innerHTML = `
+            <a href="${url}" target="_blank">
+              <div class="card-body">
+                YouTubeで再生
+              </div>
+            </a>
+          `;
+
+          list.appendChild(card);
+        });
+      }
+
+      // ページ読み込み時に実行
+      createList();
+    </script>
+  </body>
+</html>
