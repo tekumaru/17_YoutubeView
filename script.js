@@ -28,24 +28,24 @@ async function createList() {
     const id = getVideoId(url);
     if (!id) return;
 
-    const card = document.createElement("div");
-    card.className = "card";
+    const col = document.createElement("div");
 
-    card.innerHTML = `
+    // レスポンシブ設定
+    col.className = "col-12 col-sm-6 col-md-4 col-lg-3 mb-4";
+
+    col.innerHTML = `
       <a href="${url}" target="_blank">
-        <img class="thumb" src="https://img.youtube.com/vi/${id}/0.jpg">
-        <div class="card-body">
-          <div style="font-weight:bold; margin-bottom:5px;">
-            ${title}
-          </div>
-          <div style="font-size:12px; color:#888;">
-            ${formatDate(date)}
-          </div>
+        <div class="thumb-wrapper">
+          <img class="thumb" src="https://img.youtube.com/vi/${id}/maxresdefault.jpg">
+        </div>
+        <div class="mt-2">
+          <div class="title">${title}</div>
+          <div class="meta">${formatDate(date)}</div>
         </div>
       </a>
     `;
 
-    list.appendChild(card);
+    list.appendChild(col);
   });
 }
 
